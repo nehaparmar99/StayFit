@@ -9,6 +9,8 @@ import Register from './components/Register'
 import Profile from './components/Profile'
 import TaskList from './components/List'
 
+import Dashboard from "./components/Dashboard"
+import "./App.css"
 class App extends Component {
   render () {
     return (
@@ -16,11 +18,12 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <Route exact path="/" component={Opening} />
-          <div className="container">
+          <div className="container bg">
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/list" component={TaskList} />
+             <Route exact path="/dashboard" component={Dashboard} />
           </div>
         </div>
       </Router>

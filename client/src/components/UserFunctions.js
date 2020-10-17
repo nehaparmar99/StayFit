@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const register = newUser => {
+    console.log(newUser)
     return axios
         .post("users/register", {
             first_name: newUser.first_name,
@@ -14,10 +15,12 @@ export const register = newUser => {
 }
 
 export const login = user => {
+       console.log(user);
     return axios
         .post("users/login", {
-            email: user.email,
-            password: user.password
+                email: user.email,
+                password: user.password
+            
         })
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
