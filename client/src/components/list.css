@@ -1,0 +1,52 @@
+/* #main{
+  background-color: #c869ee;
+} */
+
+#listi{
+    width: 123vh;
+    float: left;
+   
+}
+
+
+
+
+ #App{
+    background-color: #c869ee;
+    min-height: 500px;
+    padding-left: 13vh;
+    width:120vh;
+    
+    
+  }
+  #in{
+    background-color: #e9b7f0;
+    border: 0;
+    width: 200px;
+    height: 50px;
+    padding: 0 20px;
+    margin: 20px;
+    border-radius: 10px;
+    color: #000;
+  }
+  #bt{
+    height: 50px;
+    width: 80px;
+    border-radius: 5px;
+    border: 0;
+    background-color: rgb(188, 28, 228);
+  }
+
+  @media (max-width: 767.98px) { 
+   #App{
+     width:100%;
+   }
+   
+    #listi{
+        width: 50vh;
+        
+        margin-left: 10vh;
+        margin-top: 5vh;
+       
+    }
+  }
