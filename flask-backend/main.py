@@ -72,12 +72,37 @@ def add():
         height = request.get_json['password']
         gender = request.get_json['gender']
 
-        mongo.db.users.update({'email': email}, {set: {'weight': weight, 'height': height, 'gender': gender}})
+        mongo.db.users.update({'email': email}, {"$set": {'weight': weight, 'height': height, 'gender': gender}})
         return jsonify({'message': 'success'})
 
     except Exception as e:
         print(e)
         return jsonify({'message': 'error'}), 500
+
+
+@app.route('/api/todo', methods=['POST', 'GET'])
+@jwt_required
+def todo():
+    email = get_jwt_identity()['email']
+    if request.method == 'POST':
+        try:
+            todo_ = request.get_json()['todo']
+            mongo.db.users.update({'email': email}, {"$push": { "todoList": todo_}})
+            return jsonify({'message': 'success'})
+        except Exception as e:
+            print(e)
+            return jsonify({'message': 'error'}), 500
+
+    elif request.method == 'GET':
+        try:
+            user = mongo.db.users.find_one({'email': email})
+            todo_ = user['todoList']
+            return jsonify(todo_)
+        except Exception as e:
+            print(e)
+            return jsonify({'message': 'error'}), 500
+
+    return 404
 
 
 if __name__ == '__main__':
