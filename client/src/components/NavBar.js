@@ -68,3 +68,110 @@ class Navbar extends Component {
 }
 
 export default withRouter(Navbar)
+// import React, { Component } from "react";
+// import "antd/dist/antd.css";
+// import { Layout, Menu, Breadcrumb, Carousel } from "antd";
+// import {
+//   AppstoreOutlined,
+//   BarChartOutlined,
+//   CloudOutlined,
+//   ShopOutlined,
+//   TeamOutlined,
+//   UserOutlined,
+//   UploadOutlined,
+//   VideoCameraOutlined,
+// } from "@ant-design/icons";
+// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+// import Login from "./Login";
+// import Register from "./Register";
+// import Calories from "./Calories";
+// import Dashboard from "./Dashboard";
+// import Profile from "./Profile";
+// import Achievement from "./Achievement";
+
+// const { Header, Content, Footer, Sider } = Layout;
+
+// class AppNavbar extends Component {
+//   state = {
+//     isLoggedIn: false,
+//   };
+//   // toggle = () => {
+//   //   this.setState({
+//   //     isOpen: !this.state.isOpen,
+//   //   });
+//   // };
+//   render() {
+//     //render our navbar
+//     return (
+//       <Layout>
+//         <Router>
+//           <Sider
+//             style={{
+//               overflow: "auto",
+//               height: "100vh",
+//               position: "fixed",
+//               left: 0,
+//             }}
+//           >
+//             <div className="logo" />
+//             <Menu theme="dark" mode="vertical" defaultSelectedKeys={["1"]}>
+//               <Menu.Item key="1" icon={<UserOutlined />}>
+//                 <Link to="/Dashboard">DASHBOARD</Link>
+//               </Menu.Item>
+//               <Menu.Item key="2" icon={<UserOutlined />}>
+//                 <Link className="link" to="/register">
+//                   REGISTER
+//                 </Link>
+//               </Menu.Item>
+//               <Menu.Item key="3" icon={<VideoCameraOutlined />}>
+//                 <Link className="link" to="/login">
+//                   LOGIN
+//                 </Link>
+//               </Menu.Item>
+//               <Menu.Item key="4" icon={<BarChartOutlined />}>
+//                 <Link className="link" to="/profile">
+//                   PROFILE
+//                 </Link>
+//               </Menu.Item>
+//                     </Menu>
+//                      <Menu.Item key="5" icon={<UploadOutlined />}>
+//                 <Link className="link" to="/achievement">
+//                   ACHIEVEMENT
+//                 </Link>
+//                     </Menu.Item>
+//                     <Menu.Item key="6" icon={<UploadOutlined />}>
+//                 <Link className="link" to="/calories">
+//                  CALORIES
+//                 </Link>
+//               </Menu.Item>
+//           </Sider>
+//           <Layout className="site-layout" style={{ marginLeft: 200 }}>
+//             <Header className="site-layout-background" style={{ padding: 0 }} />
+//             <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
+//               {this.state === true && (
+//                 <Route path="/dashboard" component={Dashboard} />
+//                         )}
+//               <Route path="/login" component={Login} />
+//               <Route path="/register" component={Register} />
+//                         <Route path="/profile" component={Profile} />
+//                             <Route path="/achievement" component={Achievement} />
+//                         <Route path="/calories" component={Calories} />
+//             </Content>
+//             <Footer style={{ textAlign: "center" }}>Stay Fit </Footer>
+//           </Layout>
+//         </Router>
+//       </Layout>
+//     );
+//   }
+// }
+
+// const contentStyle = {
+//   height: "160px",
+//   color: "#fff",
+//   lineHeight: "160px",
+//   textAlign: "center",
+//   background: "#364d79",
+// };
+
+// export default AppNavbar;

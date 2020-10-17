@@ -47,6 +47,7 @@ def login():
     users = mongo.db.users 
     email = request.get_json()['email']
     password = request.get_json()['password']
+    print(email)
     result = ""
 
     response = users.find_one({'email': email})
