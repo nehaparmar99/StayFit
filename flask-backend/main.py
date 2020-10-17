@@ -22,7 +22,6 @@ def index():
 def login():
     email = request.get_json()['email']
     password = request.get_json()['password']
-    result = ""
 
     try:
         user = mongo.db.users.find_one({'email': email})
@@ -62,11 +61,6 @@ def register():
         return jsonify({'message': 'success'})
 
     return jsonify({'message': 'User already exists'}), 500
-
-
-# @app.route('/users/profile', methods=['POST'])
-# def profile():
-#     return jsonify({'message': 'success'})
 
 
 @app.route('/api/add-data/', methods=['POST'])
