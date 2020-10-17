@@ -87,7 +87,8 @@ def todo():
     if request.method == 'POST':
         try:
             todo_ = request.get_json()['todo']
-            mongo.db.users.update({'email': email}, {"$push": { "todoList": todo_}})
+            due_date = request.get_json()['due_date']
+            mongo.db.users.update({'email': email}, {"$push": {"todoList": [{"task" : todo_, "due_date": due_date}]}})
             return jsonify({'message': 'success'})
         except Exception as e:
             print(e)
