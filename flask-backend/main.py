@@ -1,15 +1,21 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager, create_access_token
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/test"
 app.config['JWT_SECRET_KEY'] = 'my_secret'
+app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 
 mongo = PyMongo(app)
 crypt = Bcrypt(app)
 jwt = JWTManager(app)
+
+
+@app.route('/')
+def index():
+    return render_template('main.html')
 
 
 @app.route('/users/login', methods=['POST'])
@@ -27,9 +33,6 @@ def login():
                     'last_name': user['last_name'],
                     'email': user['email']
                 })
-                print("*********")
-                print("Access token", access_token)
-                print("*********")
                 return jsonify({'token': access_token})
     except Exception as e:
         print(e)
@@ -61,9 +64,26 @@ def register():
     return jsonify({'message': 'User already exists'}), 500
 
 
-@app.route('/users/profile', methods=['POST'])
-def profile():
-    return jsonify({'message': 'success'})
+# @app.route('/users/profile', methods=['POST'])
+# def profile():
+#     return jsonify({'message': 'success'})
+
+
+@app.route('/api/add-data/', methods=['POST'])
+@jwt_required
+def add():
+    try:
+        email = get_jwt_identity()['email']
+        weight = request.get_json['email']
+        height = request.get_json['password']
+        gender = request.get_json['gender']
+
+        mongo.db.users.update({'email': email}, {set: {'weight': weight, 'height': height, 'gender': gender}})
+        return jsonify({'message': 'success'})
+
+    except Exception as e:
+        print(e)
+        return jsonify({'message': 'error'}), 500
 
 
 if __name__ == '__main__':
