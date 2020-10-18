@@ -63,7 +63,7 @@ function Register() {
             password:password
         }
         register(newUser).then(res => {
-            history.push(`/login`)
+            history.push("/login")
         })
     }
 

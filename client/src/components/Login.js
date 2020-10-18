@@ -14,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -51,9 +50,7 @@ function Login() {
         const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
 	let history = useHistory();
-
     const onSubmit= (e)=> {
         e.preventDefault()
         console.log("making request");
@@ -64,10 +61,10 @@ function Login() {
         console.log(user)
         login(user).then(res => {
             console.log(res);
-            if (!res.error) {
-            	console.log("This is: " + this)
-                history.push(`/profile`)
-            }
+            // if (res.error) {
+            // 	console.log("This is: " + this)
+                history.push("/dashboard")
+            // }
         })
         setEmail("");
         setPassword("")
