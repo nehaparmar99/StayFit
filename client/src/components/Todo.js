@@ -57,20 +57,27 @@ function Todo(props) {
     const handleOpen = () => {
         setOpen(true);
     }
-    const updateTodo = () => {
+    const updateTodo = (e) => {
         //update todo with new input text
         // db.collection('todos').doc(props.todo.id).set({
         //     todo:input
         // },{merge:true})
-        //     setOpen(false);
+      // todo:input
+       const { id } = e.target.parentElement;
+      props.todos.splice(id, 1);
+     props.setTodo([...props.todos,input]);
+            setOpen(false);
       console.log("UPDATE")
     }
-   const deleteTodo = () => {
+   const deleteTodo = (e) => {
         //update todo with new input text
         // db.collection('todos').doc(props.todo.id).set({
         //     todo:input
         // },{merge:true})
         //     setOpen(false);
+     const { id } = e.target.parentElement;
+     props.todos.splice(id, 1);
+     props.setTodo([...props.todos]);
       console.log("DeletE")
     }
     return (
@@ -79,7 +86,7 @@ function Todo(props) {
         open={open}
                 onClose={e => setOpen(false)}>
                 <div className={classes.paper}>
-                    <h1>Open</h1>
+                    <h4>Edit Todo</h4>
                     <input placeholder={props.todo.todo} value={input} onChange={e=>setInput(e.target.value)}></input>
                     <Button onClick={updateTodo}>Update</Button>
                 </div>

@@ -164,7 +164,7 @@ function TodoList() {
       </form>
        <ul>
         {todos.map((todo) => (
-        <Todo todo={todo} />
+            <Todo todo={todo} setTodo={setTodos} todos={todos} />
         ))}
       </ul> 
     </div>
