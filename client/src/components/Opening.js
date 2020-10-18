@@ -26,12 +26,12 @@ class Landing extends Component {
                 </li>
                 <li className="nav-item">
                     <div>
-                    <Link to="/register" className="nav-link">
+                    <Link to="/dashboard" className="nav-link">
                         Register
                     </Link>
                     </div>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <div>
                     <Link to="/list" className="nav-link">
                         List
@@ -40,11 +40,11 @@ class Landing extends Component {
                 </li>
                 <li className="nav-item">
                     <div>
-                    <Link to="/profile" className="nav-link">
+                    <Link to="/dashboard" className="nav-link">
                         Profile
                     </Link>
                     </div>
-                </li>
+                </li> */}
             </ul></Col>
     <Col lg="6"> <div id ="bg">
                 <img id="imgi" src={home}></img>

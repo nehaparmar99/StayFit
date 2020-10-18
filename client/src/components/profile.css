@@ -40,24 +40,25 @@
 
    #updiv {
     /* width: 201vh; */
-    width:200vh;
+    width:100%;
     margin: 0px;
-    height:41vh;
+    height:31vh;
     background-image: linear-gradient( #f4c4f3 0%, #fc67fa );
    }
 
    #i {
     border-radius: 50%;
-    margin-top: 25vh;
-   
+    margin-top: 15vh;
+   margin-left: 65vh
+   ;
   }
 
   #prof {
  
     width: 500px;
-    margin-left: 70vh;
+    margin-left: 50vh;
     margin-right: auto;
-    margin-top: 16vh;
+    margin-top: 13vh;
     text-align: center;
   }
 
@@ -87,6 +88,12 @@
       margin-right: auto;
       margin-top: 16vh;
       text-align: center;
+    }
+    #i {
+      border-radius: 50%;
+      margin-top: 25vh;
+     margin-left:20vh ;
+     
     }
    
   }

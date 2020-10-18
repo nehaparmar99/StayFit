@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import Navbar from './components/Navbar'
+import Navbar from './components/NavBar'
 import Opening from './components/Opening'
 import Login from './components/Login'
 import Register from './components/Register'

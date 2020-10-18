@@ -59,6 +59,7 @@ import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 
+
 const Pricing = () => {
   const [profileName, setProfileName] = useState("");
   const [profileCell, setProfileCell] = useState("");
