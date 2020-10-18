@@ -20,7 +20,7 @@ WELCOME!!!
 to your very own fitness app,you just need to sign up to join us and step towards a healthy life
 ![Screenshot (237)](https://user-images.githubusercontent.com/48962118/96377434-59457e00-11a3-11eb-80da-d6fa00a97cad.png)
 3.OH!! Do you already have an account ,just sign in back and you are good to go :)
-
+![image](https://user-images.githubusercontent.com/48962118/96377937-8a737d80-11a6-11eb-8f5c-de880e7f7cd7.png)
 4.To keep an easier track of your daily tasks ,that you want to preform a graphical representation is the best Aid!!!
 It includes :
 A pie chart that shows the fraction of tasks you targeted to get done with ,by showing the precentage of tasks that are completed,that are in progress and the ones that are incomplete
