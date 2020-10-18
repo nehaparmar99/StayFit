@@ -117,8 +117,6 @@ import Todo from "./Todo"
 import "./TodoList.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import db from "./firebase";
-// import firebase from "firebase"
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
  space: {
