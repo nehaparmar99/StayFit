@@ -26,6 +26,15 @@ class List extends Component {
     this.deleteItem = this.deleteItem.bind(this);
     this.setUpdate = this.setUpdate.bind(this);
   }
+
+  // async componentDidMount() {
+  //   const res2 = await axios.post('/api/food').then(response=>response).catch(error=>{console.log(error)});
+  //   for(var i =0 ; i<res2.data.food_list.length;i++)
+  //   {
+     
+  //   }
+  // }
+
   async addItem (e) {
     e.preventDefault();
     // const res = await fetch("https://jsonplaceholder.typicode.com/todos/1").then((response)=> response.json())
@@ -47,6 +56,13 @@ class List extends Component {
       this.state.currentItem.text = item + "         "+cal
     const newItem = this.state.currentItem;
     if(newItem.text !==""){
+
+      const res2 = await axios.post('/api/food',{food_list:{
+        "name": item,
+        "calorie": cal
+      } }).then(response=>console.log(response)).catch(error=>{console.log(error)});
+
+
       const items = [...this.state.items, newItem];
     this.setState({
       items: items,

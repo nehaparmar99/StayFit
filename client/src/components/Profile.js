@@ -75,6 +75,8 @@ const Pricing = () => {
       setProfileName(
         `${res.data.results[0].name.first} ${res.data.results[0].name.last}`
       );
+
+     
     } catch (error) {
       console.log(error);
     }

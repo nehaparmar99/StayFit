@@ -1,5 +1,6 @@
 .list{
     color: #fff;
+    
     width: 250px;
     margin: 30px 15vh;
     height: 50px;
@@ -12,6 +13,7 @@
     position: relative;
     transition: ease-in-out;
     color: #e385ee;
+   
 }
 .in{
     background-color: #e9b7f0;
