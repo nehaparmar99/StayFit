@@ -51,11 +51,12 @@
 // }
 
 // export default Profile
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./profile.css";
 
-const Profile = () => {
+const Pricing = () => {
   const [profileName, setProfileName] = useState("");
   const [profileCell, setProfileCell] = useState("");
   const [profileImage, setProfileImage] = useState("");
@@ -103,4 +104,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Pricing;

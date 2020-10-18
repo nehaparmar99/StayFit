@@ -13,11 +13,6 @@ crypt = Bcrypt(app)
 jwt = JWTManager(app)
 
 
-@app.route('/')
-def index():
-    return render_template('main.html')
-
-
 @app.route('/users/login', methods=['POST'])
 def login():
     email = request.get_json()['email']
@@ -75,12 +70,80 @@ def add():
         height = request.get_json['password']
         gender = request.get_json['gender']
 
-        mongo.db.users.update({'email': email}, {set: {'weight': weight, 'height': height, 'gender': gender}})
+        mongo.db.users.update({'email': email}, {"$set": {'weight': weight, 'height': height, 'gender': gender}})
         return jsonify({'message': 'success'})
 
     except Exception as e:
         print(e)
         return jsonify({'message': 'error'}), 500
+
+
+@app.route('/api/todo', methods=['POST', 'GET'])
+@jwt_required
+def todo():
+    email = get_jwt_identity()['email']
+    user = mongo.db.users
+    if request.method == 'POST':
+        try:
+            todo_ = request.get_json()['todo']
+            due_date = request.get_json()['due_date']
+            done = request.get_json()['done']
+            user.update({'email': email}, {"$push": {"todoList": [{
+                "task": todo_,
+                "due_date": due_date,
+                "done": done}]
+            }})
+            return jsonify({'message': 'success'})
+        except Exception as e:
+            print(e)
+            return jsonify({'message': 'error'}), 500
+
+    elif request.method == 'GET':
+        try:
+            todo_ = user.find_one({'email': email})['todoList']
+            return jsonify({
+                    'message': 'success',
+                    'todo_list': todo_
+                })
+        except Exception as e:
+            print(e)
+            return jsonify({'message': 'error'}), 500
+
+    return 404
+
+
+@app.route('/api/food', methods=['POST', 'GET'])
+@jwt_required
+def food():
+    email = get_jwt_identity()['email']
+    user = mongo.db.users
+
+    if request.method == 'POST':
+        try:
+            food_name = request.get_json()['name']
+            calorie = request.get_json()['calorie']
+
+            user.update({'email': email}, {"$push": {"food_list": {
+                "name": food_name,
+                "calorie": calorie
+            }}})
+            return jsonify({'message': 'success'})
+        except Exception as e:
+            print(e)
+            return jsonify({'message': 'error'}), 500
+
+    elif request.method == 'GET':
+        try:
+            food_list = user.find_one({'email': email})['food_list']
+            return jsonify({
+                'message': 'success',
+                'food_list': food_list
+            })
+        except Exception as e:
+            print(e)
+            return jsonify({'message': 'error'}), 500
+
+    return 404
 
 
 if __name__ == '__main__':

@@ -1,0 +1,71 @@
+.container {
+    width:70vh;
+    float: left;
+}
+#bg{
+    width: 123vh;
+    float: left;
+}
+#imgi{
+    width: 123vh;
+    float: right;
+   
+}
+
+.jumbotron {
+    background-image: linear-gradient(
+       
+
+        #aaffa9
+        ,
+        #11ffbd
+        );
+    border: 1px solid #2980B9 ;
+    border-radius: 20px;
+    margin-left: 4vh;
+    box-shadow: 10px 15px rgba(0,0,0,0.1);
+}
+
+.nav-item div {
+ /* background-image: linear-gradient(rgb(183, 0, 255), rgb(243, 191, 240)); */
+ background-image: linear-gradient(#b2fefa
+ ,
+ #0ed2f7);
+ margin: 40px 10px 20px 10px;
+ width: 25vh;
+ margin-left: 25vh;
+ padding: 10px;
+ border-radius: 40px;
+ box-shadow: 5px 10px rgba(0,0,0,0.1);
+}
+ .nav-link {
+     text-align: center;
+     color: white;
+     font-weight: 600;
+ }
+
+ @media (max-width: 767.98px) { 
+    .container {
+        width:60vh;
+        float: left;
+    }
+    #bg{
+        width: 50vh;
+        margin-left: 20vh;
+        margin-top: 5vh;
+    }
+    #imgi{
+        width: 80vh;
+        
+       
+    }
+    .nav-item div {
+        /* background-image: linear-gradient(rgb(183, 0, 255), rgb(243, 191, 240)); */
+        background-image: linear-gradient(#a8ff78,#78ffd6);
+        margin: 40px 10px 20px 10px;
+        width: 25vh;
+        margin-left: 15vh;
+        padding: 10px;
+        border-radius: 40px;
+       }
+  }
