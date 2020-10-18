@@ -38,3 +38,4 @@ Your name
 Your picture
 Age, weight and height
 Your contacts
+![profile](https://user-images.githubusercontent.com/48962118/96377496-ab869f00-11a3-11eb-8a34-fb89dab5bd6e.png)
