@@ -1,116 +1,83 @@
-import React, { Component } from "react";
-// import "./App.css";
-import Todos from "./Todos";
-import ViewToggle from "./ViewToggle";
+import React, { Component } from 'react'
+import ChartistGraph from 'react-chartist'
+import TodoList from './TodoList'
 
-export default class Dashboard extends Component {
-  state = {
-    todos: [],
-    showDone: false
-  };
-
-  handleDone = todo => {
-    const todos = [...this.state.todos];
-    console.log(todo)
-    const index = todos.indexOf(todo);
-    const putData = {
-      method: "PUT",
-      body: JSON.stringify({ done: !todo.done }),
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem('usertoken')
-      }
-    };
-    fetch("/todos/" + todo._id, putData)
-      .then(response => response.json())
-      .then(({ todo }) => {
-        todos[index] = { id: todo._id, task: todo.task, done: todo.done };
-        this.setState({ todos });
-      })
-      .catch(error => console.log(error));
-  };
-
-  handleAddTodo = task => {
-    const todos = [...this.state.todos];
-    const postData = {
-      method: "POST",
-      body: JSON.stringify({ task: task }),
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("usertoken")
-      }
-    };
-    fetch("/todos/", postData)
-      .then(response => response.json())
-      .then(({ todo }) => {
-        todos.push({ id: todo.id, task: todo.task, done: todo.done });
-        this.setState({ todos, showDone: false });
-      })
-      .catch(error => console.log(error));
-  };
-
-  handleRemoveTodo = todo => {
-    const deleteData = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem('usertoken')
-      }
-    };
-    fetch("/todos/" + todo._id, deleteData)
-      .then(response => response.json())
-      .then(data => {
-        if (data.code === 200) {
-          const todos = this.state.todos.filter(td => td !== todo);
-          this.setState({ todos });
-        }
-      })
-      .catch(error => console.log(error));
-  };
-
-  handleViewToggle = bool => this.setState({ showDone: bool });
-
-  todosSelector = () => {
-  	console.log(this.state.todos)
-    if (this.state.showDone) {
-      return this.state.todos.filter(td => td.done);
-    }
-    return this.state.todos.filter(td => td.done === false);
-  };
-
-  componentDidMount() {
-    fetch("/todos/", {headers: {"Authorization" : "Bearer " + localStorage.getItem("usertoken")}})
-      .then(response => response.json())
-      .then(data => this.setState({ todos: data }))
-      .catch(error => console.log(error));
-  }
-
+class Dashboard extends Component {
   render() {
+    let dataPie = {
+      labels: ["40%", "20%", "40%"],
+      series: [40, 20, 40]
+    }
+    let dataSales = {
+      labels: [
+        "9:00AM",
+        "12:00AM",
+        "3:00PM",
+        "6:00PM",
+        "9:00PM",
+        "12:00PM",
+        "3:00AM",
+        "6:00AM"
+      ],
+      series: [
+        [287, 385, 490, 492, 554, 586, 698, 695],
+        [67, 152, 143, 240, 287, 335, 435, 437],
+        [23, 113, 67, 108, 190, 239, 307, 308]
+      ]
+    }
     return (
-      <div className="container-fluid mt-5">
-        <div className="row justify-content-center">
-          <div className="col-8">
-            <div className="card text-center">
-              <div className="card-header">
-                <ul className="nav card-header-pills justify-content-center">
-                  <li className="nav-item">
-                    <ViewToggle
-                      handleViewToggle={this.handleViewToggle}
-                      showDone={this.state.showDone}
-                    />
-                  </li>
-                </ul>
+      <div className="content">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-4">
+              <div className="card ">
+                <div className="card-header ">
+                  <h4 className="card-title">TODOS</h4>
+                  <p className="card-category">Performance</p>
+                </div>
+                <div className="card-body ">
+                  <ChartistGraph data={dataPie} type="Pie" />
+                  <div className="legend">
+                    <i className="fa fa-circle text-info"></i> DONE
+                                        <i className="fa fa-circle text-danger"></i> IN PROGRESS
+                                        <i className="fa fa-circle text-warning"></i> COMPLETED
+                                    </div>
+                  <hr />
+                  <div className="stats">
+                    <i className="fa fa-clock-o"></i> Updated a minute ago
+                                    </div>
+                </div>
               </div>
-              <Todos
-                todos={this.todosSelector()}
-                handleDone={this.handleDone}
-                handleRemoveTodo={this.handleRemoveTodo}
-                handleAddTodo={this.handleAddTodo}
-              />
             </div>
+            <div className="col-md-8">
+              <div className="card">
+                <div className="card-header ">
+                  <h4 className="card-title">Performance</h4>
+                  <p className="card-category">Tasks Completed in last 24 Hours</p>
+                </div>
+                <div className="card-body ">
+                  <ChartistGraph data={dataSales} type="Line" />
+                </div>
+                <div className="card-footer ">
+                  <div className="legend">
+                    <i className="fa fa-circle text-info"></i> Tasks Set
+                    <i className="fa fa-circle text-danger"></i> Completed
+                    <i className="fa fa-circle text-warning"></i> Not Started
+                </div>
+                  <hr />
+                  <div className="stats">
+                    <i className="fa fa-history"></i> Updated 3 minutes ago
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
+        <TodoList></TodoList>
       </div>
-    );
+    )
   }
 }
+
+export default Dashboard
