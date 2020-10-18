@@ -1,12 +1,11 @@
-from flask import Flask, jsonify, request, render_template
-from flask_pymongo import PyMongo
+from flask import Flask, jsonify, request
+from flask_pymongo import PyMongo, ObjectId
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/test"
 app.config['JWT_SECRET_KEY'] = 'my_secret'
-app.config['JWT_TOKEN_LOCATION'] = ['cookies']
 
 mongo = PyMongo(app)
 crypt = Bcrypt(app)
@@ -25,7 +24,7 @@ def login():
                 access_token = create_access_token(identity={
                     'first_name': user['first_name'],
                     'last_name': user['last_name'],
-                    'email': user['email'],
+                    'email': user['email']
                 })
                 return jsonify({'token': access_token})
     except Exception as e:
@@ -43,8 +42,7 @@ def register():
     last_name = request.get_json()['last_name']
     email = request.get_json()['email']
     password = request.get_json()['password'].encode('utf-8')
- age = request.get_json()['age']
-  weight = request.get_json()['weight']
+
     found = user.find_one({'email': email})
     if found is None:
         password = crypt.generate_password_hash(password).decode('utf-8')
@@ -52,16 +50,14 @@ def register():
             'first_name': first_name,
             'last_name': last_name,
             'email': email,
-            'password': password,
-            'age':age,
-            "weight":weight
+            'password': password
         })
-        return jsonify({'message': 'success'})
+        return jsonify({})
 
     return jsonify({'message': 'User already exists'}), 500
 
 
-@app.route('/api/add-data/', methods=['POST'])
+@app.route('/api/add-data', methods=['POST'])
 @jwt_required
 def add():
     try:
@@ -71,43 +67,71 @@ def add():
         gender = request.get_json['gender']
 
         mongo.db.users.update({'email': email}, {"$set": {'weight': weight, 'height': height, 'gender': gender}})
-        return jsonify({'message': 'success'})
+        return jsonify({})
 
     except Exception as e:
         print(e)
         return jsonify({'message': 'error'}), 500
 
 
-@app.route('/api/todo', methods=['POST', 'GET'])
+@app.route('/todos/', methods=['POST', 'GET'])
 @jwt_required
 def todo():
     email = get_jwt_identity()['email']
     user = mongo.db.users
     if request.method == 'POST':
         try:
-            todo_ = request.get_json()['todo']
-            due_date = request.get_json()['due_date']
-            done = request.get_json()['done']
-            user.update({'email': email}, {"$push": {"todoList": [{
+            _id = ObjectId()
+            todo_ = request.get_json()['task']
+            done = False
+            user.update({'email': email}, {"$push": {"todoList": {
+                "_id": _id,
                 "task": todo_,
-                "due_date": due_date,
-                "done": done}]
+                "done": done}
             }})
-            return jsonify({'message': 'success'})
+            return jsonify({}), 204
         except Exception as e:
             print(e)
             return jsonify({'message': 'error'}), 500
 
     elif request.method == 'GET':
         try:
-            todo_ = user.find_one({'email': email})['todoList']
-            return jsonify({
-                    'message': 'success',
-                    'todo_list': todo_
-                })
+            my_user = user.find_one({'email': 'hellohello@haha.com'})
+            todo_ = []
+            if 'todoList' in my_user and my_user['todoList']:
+                todo_ = my_user['todoList']
+                print(todo_)
+                for element in todo_:
+                    element['_id'] = str(element['_id'])
+            return jsonify(todo_)
+        except Exception as e:
+            print("Error:", e)
+            return jsonify({'message': 'error'}), 500
+
+    return 404
+
+
+@app.route('/todos/<todo_id>', methods=['DELETE', 'PUT'])
+@jwt_required
+def update__todo_list(todo_id):
+    email = get_jwt_identity()['email']
+    if request.method == 'PUT':
+        try:
+            mongo.db.users.update_one({'email': email, 'todoList._id': ObjectId(todo_id)}, {"$set": {"todoList.$.done": True}})
+            return jsonify({}), 204
         except Exception as e:
             print(e)
-            return jsonify({'message': 'error'}), 500
+            return jsonify({'message': 'Internal error'}), 500
+
+    elif request.method == 'DELETE':
+        try:
+            temp = mongo.db.users.find_one({'todoList.task': 'walk'})['todoList']
+            my_list = [element for element in temp if element['_id'] == ObjectId(todo_id)][0]
+            mongo.db.users.update({'email': 'hellohello@haha.com'}, {"$pull": {"todoList": my_list}})
+            return jsonify({}), 204
+        except Exception as e:
+            print(e)
+            return jsonify({'message', 'Invalid operation'}), 500
 
     return 404
 
@@ -127,7 +151,7 @@ def food():
                 "name": food_name,
                 "calorie": calorie
             }}})
-            return jsonify({'message': 'success'})
+            return jsonify({})
         except Exception as e:
             print(e)
             return jsonify({'message': 'error'}), 500
