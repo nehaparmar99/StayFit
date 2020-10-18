@@ -26,7 +26,7 @@ class Landing extends Component {
                 </li>
                 <li className="nav-item">
                     <div>
-                    <Link to="/dashboard" className="nav-link">
+                    <Link to="/register" className="nav-link">
                         Register
                     </Link>
                     </div>

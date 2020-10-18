@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navbar from './NavBar'
+import Navbar from './Navbar'
 import Footer from './Footer'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Dashboard from './Dashboard'
