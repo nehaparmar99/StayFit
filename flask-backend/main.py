@@ -96,7 +96,7 @@ def todo():
 
     elif request.method == 'GET':
         try:
-            my_user = user.find_one({'email': 'hellohello@haha.com'})
+            my_user = user.find_one({'email': email})
             todo_ = []
             if 'todoList' in my_user and my_user['todoList']:
                 todo_ = my_user['todoList']
@@ -125,9 +125,9 @@ def update__todo_list(todo_id):
 
     elif request.method == 'DELETE':
         try:
-            temp = mongo.db.users.find_one({'todoList.task': 'walk'})['todoList']
+            temp = mongo.db.users.find_one({'email': email, 'todoList._id': ObjectId(todo_id)})['todoList']
             my_list = [element for element in temp if element['_id'] == ObjectId(todo_id)][0]
-            mongo.db.users.update({'email': 'hellohello@haha.com'}, {"$pull": {"todoList": my_list}})
+            mongo.db.users.update({'email': email}, {"$pull": {"todoList": my_list}})
             return jsonify({}), 204
         except Exception as e:
             print(e)

@@ -1,15 +1,13 @@
 import axios from 'axios'
 
 export const register = newUser => {
-    console.log(newUser)
+    // console.log(newUser)
     return axios
         .post("users/register", {
             first_name: newUser.first_name,
             last_name: newUser.last_name,
             email: newUser.email,
-            password: newUser.password,
-            age:newUser.age,
-            weight:newUser.weight
+            password: newUser.password
         })
         .then(response => {
             console.log("Registered")
@@ -17,7 +15,7 @@ export const register = newUser => {
 }
 
 export const login = user => {
-       console.log(user);
+       // console.log(user);
     return axios
         .post("users/login", {
                 email: user.email,
@@ -32,4 +30,3 @@ export const login = user => {
             console.log(err)
         })
 }
-
