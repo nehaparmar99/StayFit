@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
 background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
       // backgroud: "white",
-    "padding":"35px"
+    "padding":"30px"
   },
   avatar: {
     margin: theme.spacing(1),
