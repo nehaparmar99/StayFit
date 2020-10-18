@@ -30,7 +30,7 @@ def login():
                 access_token = create_access_token(identity={
                     'first_name': user['first_name'],
                     'last_name': user['last_name'],
-                    'email': user['email']
+                    'email': user['email'],
                 })
                 return jsonify({'token': access_token})
     except Exception as e:
@@ -48,7 +48,8 @@ def register():
     last_name = request.get_json()['last_name']
     email = request.get_json()['email']
     password = request.get_json()['password'].encode('utf-8')
-
+ age = request.get_json()['age']
+  weight = request.get_json()['weight']
     found = user.find_one({'email': email})
     if found is None:
         password = crypt.generate_password_hash(password).decode('utf-8')
@@ -56,7 +57,9 @@ def register():
             'first_name': first_name,
             'last_name': last_name,
             'email': email,
-            'password': password
+            'password': password,
+            'age':age,
+            "weight":weight
         })
         return jsonify({'message': 'success'})
 
