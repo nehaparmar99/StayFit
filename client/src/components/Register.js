@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import { register } from './UserFunctions'
+import { useHistory } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,13 +8,14 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { useHistory } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import './Register.css'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -28,19 +30,38 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    // backgroundImage: `url(https://source.unsplash.com/random)` ,
+    // backgroundRepeat: 'no-repeat',
+    // backgroundColor:
+    //   theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+   
+    // backgroundSize: 'cover',
+    // // backgroundPosition: 'center',
+    margin: "0px",
+    padding: "0px",
+    top:"0"
+  },
     paper: {
-    marginTop: theme.spacing(8),
+    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+      alignItems: 'center',
+background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+      // backgroud: "white",
+    "padding":"35px"
   },
+    // cont:{
+    //   marginTop:"70px" 
+    // },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    // marginTop: theme.spacing(1),
+    // marginTop:"150px"
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -51,8 +72,9 @@ function Register() {
     const [first_name, setFName] = useState('');
     const [last_name, setLName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    
+  const [password, setPassword] = useState('');
+  const [age, setAge] = useState('');
+  const [weight, setWeight] = useState('');
     let history = useHistory();
     const onSubmit =(e) =>{
         e.preventDefault()
@@ -60,22 +82,25 @@ function Register() {
             first_name: first_name,
             last_name: last_name,
             email:email,
-            password:password
+            password:password,
+          age: age,
+            weight:weight
         }
         register(newUser).then(res => {
-            history.push("/login")
+          history.push("/login")
         })
     }
 
-    return (
-               <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
+  return (
+      <div className={classes.root}>
+  <Container component="main" maxWidth="xs" className={classes.cont}>
+        <CssBaseline />
+          <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign Up
+          Sign Up With Us
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmit}>
                      <TextField
@@ -125,6 +150,30 @@ function Register() {
             id="password"
             autoComplete="current-password"
          value={password} onChange={(e)=>(setPassword(e.target.value))}
+            />
+                 <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="age"
+            label="Age"
+            type="number"
+            id="age"
+            autoComplete="current-password"
+         value={age} onChange={(e)=>(setAge(e.target.value))}
+            />
+                 <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Weight(in kg)"
+            label="Weight"
+            type="number"
+            id="weight"
+            autoComplete="current-password"
+         value={weight} onChange={(e)=>(setWeight(e.target.value))}
           />
           <Button
             type="submit"
@@ -133,14 +182,15 @@ function Register() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+              Sign Up
           </Button>
         </form>
-      </div>
+     </div>
       <Box mt={8}>
         <Copyright />
       </Box>
-    </Container>    
+        </Container>
+      </div>
         )
     }
 

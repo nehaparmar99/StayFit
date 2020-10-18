@@ -3,14 +3,16 @@ from flask_pymongo import PyMongo, ObjectId
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 app.config["MONGO_URI"] = "mongodb://localhost:27017/test"
 app.config['JWT_SECRET_KEY'] = 'my_secret'
 
 mongo = PyMongo(app)
 crypt = Bcrypt(app)
 jwt = JWTManager(app)
-
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 @app.route('/users/login', methods=['POST'])
 def login():
