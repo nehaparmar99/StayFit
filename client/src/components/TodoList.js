@@ -115,11 +115,33 @@ import { Button } from '@material-ui/core';
 import { FormControl,Input,InputLabel } from '@material-ui/core';
 import Todo from "./Todo"
 import "./TodoList.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 // import db from "./firebase";
 // import firebase from "firebase"
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles((theme) => ({
+ space: {
+    // position: 'absolute',
+    // width: 400,
+    // backgroundColor: theme.palette.background.paper,
+    // border: '2px solid #000',
+    // boxShadow: theme.shadows[5],
+    // padding: theme.spacing(2, 4, 3),
+    "padding-top": "15px",
+    "padding-bottom": "15px",
+    "color": "red",
+     "text-align":"left"
+  },
+  spaces: {
+    "padding-bottom": "15px",
+  }
+}));
 function TodoList() {
+   const classes = useStyles();
   const [todos, setTodos] = useState(["wash clothes","read a book"]);
   const [input, setInput] = useState("");
+   const [startDate, setStartDate] = useState(new Date());
   const addTodo = (e) => {
     e.preventDefault();
     setTodos([...todos, input]);
@@ -129,8 +151,10 @@ function TodoList() {
     <div className="App">
       <form>
         <FormControl>
-          <InputLabel>Write a todo</InputLabel>
-  <Input  value={input} onChange={(e)=>(setInput(e.target.value))}/>
+          <InputLabel className={classes.spaces}>Write a todo</InputLabel>
+  <Input className={classes.space} value={input} onChange={(e)=>(setInput(e.target.value))}/>
+  <span className={classes.space}>Set a Deadline </span>
+          <DatePicker selected={startDate} defaultValue={new Date(2018, 1, 20)} required={true} onChange={date => setStartDate(date)} />
         </FormControl>
              <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="primary" >
   Add Todo
