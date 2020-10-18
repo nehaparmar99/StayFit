@@ -6,7 +6,7 @@
 }
 
 #listi{
-    width: 123vh;
+    width: 88vh;
     float: left;
    
 }
@@ -23,6 +23,7 @@
     /* width:120vh; */
     margin-top: 10vh;
    overflow: scroll;
+   margin-left: 5vh;
     
   }
   #in{
@@ -31,7 +32,7 @@
     width: 200px;
     height: 50px;
     padding: 0 20px;
-    margin: 20px;
+    margin: 20px 20px 20px 90px;
     border-radius: 10px;
     color: #000;
   }
@@ -45,11 +46,14 @@
 
   @media (max-width: 767.98px) { 
   
+    #App {
+      margin-left: 0vh;
+    }
    
     #listi{
-        width: 90vh;
+        width: 60vh;
         height: 50vh;
-        margin-left: -16vh;
+        margin-left: 0vh;
         margin-top: 5vh;
        
     }

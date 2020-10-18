@@ -11,7 +11,7 @@ class Landing extends Component {
             <div>
                 <Container>
   <Row>
-    <Col lg="6"><div className="jumbotron mt-5">
+    <Col lg="8"><div className="jumbotron mt-5">
                     <div className="col-sm-8 mx-auto">
                         <h1 className="text-center">WELCOME TO STAYFIT</h1>
                     </div>
@@ -46,7 +46,7 @@ class Landing extends Component {
                     </div>
                 </li> */}
             </ul></Col>
-    <Col lg="6"> <div id ="bg">
+    <Col lg="4"> <div id ="bg">
                 <img id="imgi" src={home}></img>
             </div></Col>
   </Row>
