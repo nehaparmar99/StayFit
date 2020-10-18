@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react'
 import { register } from './UserFunctions'
-import { useHistory } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,13 +7,13 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router-dom';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -29,26 +28,11 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  //  root: {
-  // //   "background-color":"black"
-  //     backgroundImage: `url(https://source.unsplash.com/random)` ,
-  // },
-  root: {
-    // backgroundImage: `url(https://source.unsplash.com/random)` ,
-    // backgroundRepeat: 'no-repeat',
-    // backgroundColor:
-    //   theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    // backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    margin:"0px"
-  },
     paper: {
-    margin: theme.spacing(8, 4),
+    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
-      alignItems: 'center',
-background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    "padding":"35px"
+    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -67,9 +51,8 @@ function Register() {
     const [first_name, setFName] = useState('');
     const [last_name, setLName] = useState('');
     const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [age, setAge] = useState('');
-  const [weight, setWeight] = useState('');
+    const [password, setPassword] = useState('');
+    
     let history = useHistory();
     const onSubmit =(e) =>{
         e.preventDefault()
@@ -77,25 +60,22 @@ function Register() {
             first_name: first_name,
             last_name: last_name,
             email:email,
-            password:password,
-          age: age,
-            weight:weight
+            password:password
         }
         register(newUser).then(res => {
-          history.push("/login")
+            history.push(`/login`)
         })
     }
 
-  return (
-      <div className={classes.root}>
-  <Container component="main" maxWidth="xs" >
-        <CssBaseline />
-          <div className={classes.paper}>
+    return (
+               <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign Up With Us
+          Sign Up
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmit}>
                      <TextField
@@ -145,30 +125,6 @@ function Register() {
             id="password"
             autoComplete="current-password"
          value={password} onChange={(e)=>(setPassword(e.target.value))}
-            />
-                 <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="age"
-            label="Age"
-            type="number"
-            id="age"
-            autoComplete="current-password"
-         value={age} onChange={(e)=>(setAge(e.target.value))}
-            />
-                 <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="Weight(in kg)"
-            label="Weight"
-            type="number"
-            id="weight"
-            autoComplete="current-password"
-         value={weight} onChange={(e)=>(setWeight(e.target.value))}
           />
           <Button
             type="submit"
@@ -177,15 +133,14 @@ function Register() {
             color="primary"
             className={classes.submit}
           >
-              Sign Up
+            Sign Up
           </Button>
         </form>
-     </div>
+      </div>
       <Box mt={8}>
         <Copyright />
       </Box>
-        </Container> 
-      </div>
+    </Container>    
         )
     }
 
