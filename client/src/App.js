@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <NavBar />
+          {/* <NavBar /> */}
           <Route exact path="/" component={Opening} />
           <div className="container bg">
             <Route exact path="/register" component={Register} />

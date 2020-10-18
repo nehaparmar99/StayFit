@@ -1,16 +1,8 @@
 .container {
-    width:70vh;
+    /* width:70vh; */
     float: left;
 }
-#bg{
-    width: 123vh;
-    float: left;
-}
-#imgi{
-    width: 123vh;
-    float: right;
-   
-}
+
 
 .jumbotron {
     background-image: linear-gradient(
@@ -46,17 +38,18 @@
 
  @media (max-width: 767.98px) { 
     .container {
-        width:60vh;
-        float: left;
+        /* width:60vh; */
+       
     }
     #bg{
-        width: 50vh;
+        /* width: 50vh;
         margin-left: 20vh;
-        margin-top: 5vh;
+        margin-top: 5vh; */
+       
     }
     #imgi{
-        width: 80vh;
-        
+        width: 70vh;
+      float: left;
        
     }
     .nav-item div {
