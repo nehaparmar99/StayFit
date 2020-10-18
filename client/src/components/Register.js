@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import { register } from './UserFunctions'
+import { useHistory } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,12 +8,12 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -27,8 +28,19 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+   root: {
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundRepeat: 'no-repeat',
+    backgroundColor:
+      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
     paper: {
-    marginTop: theme.spacing(8),
+    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -50,23 +62,30 @@ function Register() {
     const [first_name, setFName] = useState('');
     const [last_name, setLName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('');
+  const [age, setAge] = useState('');
+  const [weight, setWeight] = useState('');
+    let history = useHistory();
     const onSubmit =(e) =>{
         e.preventDefault()
         const newUser = {
             first_name: first_name,
             last_name: last_name,
             email:email,
-            password:password
+            password:password,
+          age: age,
+            weight:weight
         }
         register(newUser).then(res => {
-            this.props.history.push(`/login`)
+          history.push("/login")
         })
     }
 
     return (
-               <Container component="main" maxWidth="xs">
-      <CssBaseline />
+ <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+         <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square></Grid>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -122,6 +141,30 @@ function Register() {
             id="password"
             autoComplete="current-password"
          value={password} onChange={(e)=>(setPassword(e.target.value))}
+            />
+                 <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="age"
+            label="Age"
+            type="number"
+            id="age"
+            autoComplete="current-password"
+         value={age} onChange={(e)=>(setAge(e.target.value))}
+            />
+                 <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Weight(in kg)"
+            label="Weight"
+            type="number"
+            id="weight"
+            autoComplete="current-password"
+         value={weight} onChange={(e)=>(setWeight(e.target.value))}
           />
           <Button
             type="submit"
@@ -130,14 +173,14 @@ function Register() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+              Sign Up
           </Button>
+             <Box mt={5}>
+              <Copyright />
+              </Box>
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>    
+   </Grid>
         )
     }
 
