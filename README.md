@@ -3,3 +3,4 @@ A fitness pseudo web app targeting health-conscious people to track their habits
 <br />
 Clone the repository
 <br />
+![welcome](https://user-images.githubusercontent.com/48962118/96376900-416bfb00-119f-11eb-9db6-253267e63e10.png)
