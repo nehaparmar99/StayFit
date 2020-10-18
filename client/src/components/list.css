@@ -1,9 +1,12 @@
-/* #main{
-  background-color: #c869ee;
-} */
+#main{
+  /* background-color: #c869ee; */
+  margin: 0px;
+ 
+  
+}
 
 #listi{
-    width: 123vh;
+    width: 88vh;
     float: left;
    
 }
@@ -13,10 +16,14 @@
 
  #App{
     background-color: #c869ee;
-    min-height: 500px;
-    padding-left: 13vh;
-    width:120vh;
-    
+    height: 600px;
+    max-height: 600px;
+    /* max-height: auto; */
+    /* padding-left: 13vh; */
+    /* width:120vh; */
+    margin-top: 10vh;
+   overflow: scroll;
+   margin-left: 5vh;
     
   }
   #in{
@@ -25,7 +32,7 @@
     width: 200px;
     height: 50px;
     padding: 0 20px;
-    margin: 20px;
+    margin: 20px 20px 20px 90px;
     border-radius: 10px;
     color: #000;
   }
@@ -38,14 +45,15 @@
   }
 
   @media (max-width: 767.98px) { 
-   #App{
-     width:100%;
-   }
+  
+    #App {
+      margin-left: 0vh;
+    }
    
     #listi{
-        width: 50vh;
-        
-        margin-left: 10vh;
+        width: 60vh;
+        height: 50vh;
+        margin-left: 0vh;
         margin-top: 5vh;
        
     }

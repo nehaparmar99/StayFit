@@ -31,7 +31,7 @@ class Sidebar extends Component {
               </NavLink>
                     </li>
                      <li className="nav-item">
-              <NavLink className="nav-link" to='/calories'>
+              <NavLink className="nav-link" to='/list'>
                 <i className="nc-icon nc-circle-09"></i>
                 <p>Calories</p>
               </NavLink>

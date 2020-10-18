@@ -5,6 +5,9 @@ import ListItems from './list-items'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import home from "./food2.jpg"
+import { Container } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 library.add(faTrash)
 
@@ -28,6 +31,8 @@ class List extends Component {
     // const res = await fetch("https://jsonplaceholder.typicode.com/todos/1").then((response)=> response.json())
     //  alert(res)
     var item = this.state.currentItem.text
+    if(item!="")
+    {
     console.log(item)
     const res = await axios.get(`https://rapidapi.p.rapidapi.com/v1_1/search/${item}`,{ headers: {
         'x-rapidapi-host': 'nutritionix-api.p.rapidapi.com',
@@ -53,12 +58,16 @@ class List extends Component {
     })
     }
     else{
-      console.log("else")
+      alert("Food item not entered!!!!")
     }}
   
     else{
       alert("Food item entered Incorrect!!!!")
     }
+  }
+  else{
+    alert("Food item not entered!!!!")
+  }
   
   
   }
@@ -149,26 +158,53 @@ class List extends Component {
    
   // };
   return (
-    <div id="main" className="row">
+    // <div id="main" className="row">
     
          
-    <div id="App" className="col col-lg-11">
-      <header>
-        <form id="to-do-form" onSubmit={this.addItem}>
-          <input id="in" type="text" placeholder="Enter task" value= {this.state.currentItem.text} onChange={this.handleInput}></input>
-          <button id="bt" type="submit">Add</button>
-        </form>
-        <p>{this.state.items.text}</p>
+    // <div id="App" className="col col-lg-11">
+    //   <header>
+    //     <form id="to-do-form" onSubmit={this.addItem}>
+    //       <input id="in" type="text" placeholder="Enter task" value= {this.state.currentItem.text} onChange={this.handleInput}></input>
+    //       <button id="bt" type="submit">Add</button>
+    //     </form>
+    //     <p>{this.state.items.text}</p>
         
-          <ListItems items={this.state.items} deleteItem={this.deleteItem} setUpdate={this.setUpdate}/>
+    //       <ListItems items={this.state.items} deleteItem={this.deleteItem} setUpdate={this.setUpdate}/>
         
-      </header>
-    </div>
-    <div className="col col-lg-1">
-      <img id="listi" src={home}></img>
-      </div>
+    //   </header>
+    // </div>
+    // <div className="col col-lg-1">
+    //   <img id="listi" src={home}></img>
+    //   </div>
  
     
+    // </div>
+    <div id="main">
+      <Container>
+        <Row>
+          <Col lg="6">
+            <div>
+          <div id="App" >
+       <header>
+         <form id="to-do-form" onSubmit={this.addItem}>
+           <input id="in" type="text" placeholder="Enter task" value= {this.state.currentItem.text} onChange={this.handleInput}></input>
+           <button id="bt" type="submit">Add</button>
+         </form>
+         <p>{this.state.items.text}</p>
+        
+           <ListItems items={this.state.items} deleteItem={this.deleteItem} setUpdate={this.setUpdate}/>
+        
+       </header>
+     </div>
+     </div>
+          </Col>
+          <Col lg="6">
+          <div >
+       <img id="listi" src={home}></img>
+       </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
  }

@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 import './assets/css/bootstrap.min.css'
 import './assets/css/light-bootstrap-dashboard.css'
 import './assets/css/dashboard.css'
