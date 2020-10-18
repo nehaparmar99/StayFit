@@ -2004,10 +2004,38 @@ fieldset[disabled] .form-control {
 }
 
 .navbar .navbar-brand {
-  font-weight: 400;
+  font-weight: 700;
   margin: 5px 0px;
+  font-size: 23px;
+  color: #723bc0;
+  letter-spacing: 2px;
+}
+.fa {
+  /* padding-bottom: 10px; */
+  padding-top: 25px;
   font-size: 20px;
-  color: #888888;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+  /* background: #3b5998; */
+  color: red;
+}
+
+/* Twitter */
+.fa-twitter {
+  /* background: #55acee; */
+  color: #55acee;
 }
 
 .navbar .navbar-brand:hover {

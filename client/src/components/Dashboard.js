@@ -277,17 +277,17 @@ class Dashboard extends Component {
             <div className="col-md-8">
               <div className="card">
                 <div className="card-header ">
-                  <h4 className="card-title">Users Behavior</h4>
-                  <p className="card-category">24 Hours performance</p>
+                  <h4 className="card-title">Performance</h4>
+                  <p className="card-category">Tasks Completed in last 24 Hours</p>
                 </div>
                 <div className="card-body ">
                   <ChartistGraph data={dataSales} type="Line" />
                 </div>
                 <div className="card-footer ">
                   <div className="legend">
-                    <i className="fa fa-circle text-info"></i> Open
-                    <i className="fa fa-circle text-danger"></i> Click
-                    <i className="fa fa-circle text-warning"></i> Click Second Time
+                    <i className="fa fa-circle text-info"></i> Tasks Set
+                    <i className="fa fa-circle text-danger"></i> Completed
+                    <i className="fa fa-circle text-warning"></i> Not Started
                 </div>
                   <hr />
                   <div className="stats">

@@ -13,6 +13,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 function Copyright() {
   return (
@@ -28,22 +29,26 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
-   root: {
-    height: '100vh',
-  },
-  image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+  //  root: {
+  // //   "background-color":"black"
+  //     backgroundImage: `url(https://source.unsplash.com/random)` ,
+  // },
+  root: {
+    backgroundImage: `url(https://source.unsplash.com/random)` ,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    margin:"0px"
   },
     paper: {
     margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+      alignItems: 'center',
+background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    "padding":"35px"
   },
   avatar: {
     margin: theme.spacing(1),
@@ -81,17 +86,16 @@ function Register() {
         })
     }
 
-    return (
- <Grid container component="main" className={classes.root}>
+  return (
+      <div className={classes.root}>
+  <Container component="main" maxWidth="xs" >
         <CssBaseline />
-         <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square></Grid>
-      <div className={classes.paper}>
+          <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign Up
+          Sign Up With Us
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmit}>
                      <TextField
@@ -175,12 +179,13 @@ function Register() {
           >
               Sign Up
           </Button>
-             <Box mt={5}>
-              <Copyright />
-              </Box>
         </form>
+     </div>
+      <Box mt={8}>
+        <Copyright />
+      </Box>
+        </Container> 
       </div>
-   </Grid>
         )
     }
 

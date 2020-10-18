@@ -13,11 +13,17 @@ class Footer extends Component {
                   Home
                 </Link>
               </li>
-
+              <li><a href="#" className="fa fa-facebook"></a></li>
+                  <li><a href="#" className="fa fa-twitter"></a></li>
             </ul>
+            {/* <ul className="right">
+            <li><a href="#" className="fa fa-facebook"></a></li>
+              <li><a href="#" className="fa fa-twitter"></a></li>
+              </ul> */}
             <p className="copyright text-center">
-              © 2019
+              © 2020
           </p>
+            
           </nav>
         </div>
       </footer>

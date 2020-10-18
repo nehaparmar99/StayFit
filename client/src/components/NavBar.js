@@ -6,13 +6,14 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg " color-on-scroll="500">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">Dashboard</a>
+          <a className="navbar-brand" href="/" >StayFit</a>
           <div className="collapse navbar-collapse justify-content-end" id="navigation">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link className="nav-link" to='/'>
                   <span className="no-icon">Log out</span>
                 </Link>
+                
               </li>
             </ul>
           </div>

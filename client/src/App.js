@@ -24,7 +24,7 @@ class App extends Component {
              <Route exact path="/list" component={TaskList} />
             {/* <Route exact path="/dashboard" component={Dashboardd} />  */}
                 <Route exact path="/dashboard" component={Dashboardd} />
-        <Route exact path="/todos" component={TodoList}></Route>
+        {/* <Route exact path="/todos" component={TodoList}></Route> */}
       </Router>
     );
   }
