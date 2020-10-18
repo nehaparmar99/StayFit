@@ -21,8 +21,8 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
-            {/* <Route exact path="/list" component={TaskList} />
-            <Route exact path="/dashboard" component={Dashboardd} /> */}
+             <Route exact path="/list" component={TaskList} />
+            {/* <Route exact path="/dashboard" component={Dashboardd} />  */}
                 <Route exact path="/dashboard" component={Dashboardd} />
         <Route exact path="/todos" component={TodoList}></Route>
       </Router>
