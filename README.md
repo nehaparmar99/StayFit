@@ -30,6 +30,7 @@ You can also add tasks you want to perform ,through this add task feature and ge
 5.Just get to the Calories page
 Enter a valid food item that you took
 And check out the calories  !!!!
+![calorie](https://user-images.githubusercontent.com/48962118/96377500-b04b5300-11a3-11eb-8ed2-283d8d736a76.png)
 Also you get to maintain a list of the food items with their respective calories content in form of a list
 
 6.You can maintain our profile as well !!!with following features
