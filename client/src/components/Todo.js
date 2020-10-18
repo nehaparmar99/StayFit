@@ -29,7 +29,6 @@ import React, { useEffect, useState } from "react";
 import "./Todo.css"
 import { List,Avatar,ImageIcon,ListItemAvatar, ListItemText, ListItem, Button,Modal } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-// import db from "./firebase"
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   paper: {
