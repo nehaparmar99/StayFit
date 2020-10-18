@@ -225,6 +225,7 @@
 // // }
 import React, { Component } from 'react'
 import ChartistGraph from 'react-chartist'
+import TodoList from './TodoList'
 
 class Dashboard extends Component {
   render() {
@@ -256,19 +257,19 @@ class Dashboard extends Component {
             <div className="col-md-4">
               <div className="card ">
                 <div className="card-header ">
-                  <h4 className="card-title">Email Statistics</h4>
-                  <p className="card-category">Last Campaign Performance</p>
+                  <h4 className="card-title">TODOS</h4>
+                  <p className="card-category">Performance</p>
                 </div>
                 <div className="card-body ">
                   <ChartistGraph data={dataPie} type="Pie" />
                   <div className="legend">
-                    <i className="fa fa-circle text-info"></i> Open
-                                        <i className="fa fa-circle text-danger"></i> Bounce
-                                        <i className="fa fa-circle text-warning"></i> Unsubscribe
+                    <i className="fa fa-circle text-info"></i> DONE
+                                        <i className="fa fa-circle text-danger"></i> IN PROGRESS
+                                        <i className="fa fa-circle text-warning"></i> COMPLETED
                                     </div>
                   <hr />
                   <div className="stats">
-                    <i className="fa fa-clock-o"></i> Campaign sent 2 days ago
+                    <i className="fa fa-clock-o"></i> Updated a minute ago
                                     </div>
                 </div>
               </div>
@@ -298,6 +299,7 @@ class Dashboard extends Component {
 
           </div>
         </div>
+        <TodoList></TodoList>
       </div>
     )
   }

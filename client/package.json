@@ -6,10 +6,6 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
-<<<<<<< HEAD
-=======
-    "axios": "^0.18.0",
->>>>>>> 0e2f860004eb247d0456b03058e6a9e308994b1b
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "antd": "^4.7.0",
@@ -24,12 +20,8 @@
     "react-chartist": "^0.14.3",
     "react-datepicker": "^3.3.0",
     "react-dom": "^16.5.2",
-<<<<<<< HEAD
-    "react-router-dom": "^5.2.0",
-=======
     "react-flip-move": "^3.0.4",
-    "react-router-dom": "^4.3.1",
->>>>>>> 0e2f860004eb247d0456b03058e6a9e308994b1b
+    "react-router-dom": "^5.2.0",
     "react-scripts": "2.0.4",
     "react-transition-group": "^4.4.1",
     "reactstrap": "^8.6.0",
