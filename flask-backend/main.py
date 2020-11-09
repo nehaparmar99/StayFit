@@ -34,6 +34,7 @@ def login():
     return jsonify({'message': 'Invalid username or password'}), 404
 
 
+
 @app.route('/users/register', methods=['POST'])
 def register():
     user = mongo.db.users
@@ -83,6 +84,7 @@ def todo():
         try:
             _id = ObjectId()
             todo_ = request.get_json()['task']
+            # date=request.get_json()['date']
             done = False
             user.update({'email': email}, {"$push": {"todoList": {
                 "_id": _id,

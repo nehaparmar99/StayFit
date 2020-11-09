@@ -1,33 +1,6 @@
-// import React from "react";
-// import Button from "./Button";
-
-// const Todo = ({ todo, handleDone, handleRemoveTodo }) => {
-//   return (
-//     <li className="list-group-item d-flex align-items-baseline list-unstyled">
-//       <input
-//         type="checkbox"
-//         id={"done" + todo.id}
-//         className="mr-4"
-//         onChange={() => handleDone(todo)}
-//         defaultChecked={todo.done}
-//       />
-//       <label for={"done" + todo.id}>
-//         {todo.done ? <s>{todo.task}</s> : todo.task}
-//       </label>
-//       <Button
-//         className="btn btn-danger ml-auto"
-//         onClick={() => handleRemoveTodo(todo)}
-//       >
-//         Delete
-//       </Button>
-//     </li>
-//   );
-// };
-
-// export default Todo;
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "./Todo.css"
-import { List,Avatar,ImageIcon,ListItemAvatar, ListItemText, ListItem, Button,Modal } from '@material-ui/core';
+import { List,ListItemAvatar, ListItemText, ListItem, Button,Modal } from '@material-ui/core';
 import DeleteForeverOutlinedIcon  from '@material-ui/icons/DeleteForever';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
@@ -56,29 +29,47 @@ function Todo(props) {
     const [input, setInput] = useState("");
     const handleOpen = () => {
         setOpen(true);
-    }
+  }
+
     const updateTodo = (e) => {
-        //update todo with new input text
-        // db.collection('todos').doc(props.todo.id).set({
-        //     todo:input
-        // },{merge:true})
-      // todo:input
-       const { id } = e.target.parentElement;
-      props.todos.splice(id, 1);
-     props.setTodo([...props.todos,input]);
-            setOpen(false);
-      console.log("UPDATE")
+      const { id } = e.target.parentElement;
+      console.log(id)
+      // fetch("/todos/", {
+      //   method="POST",
+      //   headers:{
+      //       "Content-type": "application/json"
+      //   },
+      //     body: JSON.stringify({
+      //email:props.email
+      //       id: id,
+      //       todo:input
+      //   }),
+      // }).then(res => console.log(res))
+      //   .catch(err => console.log(err))
+      //    setOpen(false);
+    //   props.todos.splice(id, 1);
+    //  props.setTodo([...props.todos,input]);
+    //         setOpen(false);
+    //   console.log("UPDATE")
     }
    const deleteTodo = (e) => {
-        //update todo with new input text
-        // db.collection('todos').doc(props.todo.id).set({
-        //     todo:input
-        // },{merge:true})
-        //     setOpen(false);
      const { id } = e.target.parentElement;
-     props.todos.splice(id, 1);
-     props.setTodo([...props.todos]);
-      console.log("DeletE")
+      console.log(id)
+      // fetch("/todos/", {
+      //   method="DELETE",
+      //   headers:{
+      //       "Content-type": "application/json"
+      //   },
+      //     body: JSON.stringify({
+    // email:props.email,
+      //       id: id,
+      //   }),
+      // }).then(res => console.log(res))
+      //  .catch(err => console.log(err))
+        setOpen(false);
+    //  props.todos.splice(id, 1);
+    //  props.setTodo([...props.todos]);
+    //   console.log("DeletE")
     }
     return (
         <>

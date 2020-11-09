@@ -26,64 +26,61 @@ class List extends Component {
     this.deleteItem = this.deleteItem.bind(this);
     this.setUpdate = this.setUpdate.bind(this);
   }
-
-  // async componentDidMount() {
-  //   const res2 = await axios.post('/api/food').then(response=>response).catch(error=>{console.log(error)});
-  //   for(var i =0 ; i<res2.data.food_list.length;i++)
-  //   {
-     
-  //   }
-  // }
-
-  async addItem (e) {
+  componentDidMount() {
+    const l = localStorage.getItem('email')
+    console.log(l);
+  }
+  addItem(e) {
     e.preventDefault();
+    fetch('api/food',
+      {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ email: "n@gmail.com", name: "neha", calorie: 200 }),
+      })
+      .then(res=>console.log(res)).catch(err=>console.log(err))
     // const res = await fetch("https://jsonplaceholder.typicode.com/todos/1").then((response)=> response.json())
     //  alert(res)
-    var item = this.state.currentItem.text
-    if(item!="")
-    {
-    console.log(item)
-    const res = await axios.get(`https://rapidapi.p.rapidapi.com/v1_1/search/${item}`,{ headers: {
-        'x-rapidapi-host': 'nutritionix-api.p.rapidapi.com',
-        'x-rapidapi-key': 'a885d9865cmsh8dba1c849ea8544p1e1351jsn46f59f13288c',
-        'useQueryString': 'true'
-      },params:{fields: 'nf_calories,nf_total_fat'}}).then(response=>response).catch(error=>{console.log(error)});
-      //alert(JSON.parse(res));
-      //alert(res)
-      console.log(res.data)
-      if(res.data.total_hits ){
-      var cal = res.data.hits[0].fields.nf_calories
-      this.state.currentItem.text = item + "         "+cal
-    const newItem = this.state.currentItem;
-    if(newItem.text !==""){
+  //   var item = this.state.currentItem.text
+  //   if(item!="")
+  //   {
+  //   console.log(item)
+  //   const res = await axios.get(`https://rapidapi.p.rapidapi.com/v1_1/search/${item}`,{ headers: {
+  //       'x-rapidapi-host': 'nutritionix-api.p.rapidapi.com',
+  //       'x-rapidapi-key': 'a885d9865cmsh8dba1c849ea8544p1e1351jsn46f59f13288c',
+  //       'useQueryString': 'true'
+  //     },params:{fields: 'nf_calories,nf_total_fat'}}).then(response=>response).catch(error=>{console.log(error)});
+  //     //alert(JSON.parse(res));
+  //     //alert(res)
+  //     console.log(res.data)
+  //     if(res.data.total_hits ){
+  //     var cal = res.data.hits[0].fields.nf_calories
+  //     this.state.currentItem.text = item + "         "+cal
+  //   const newItem = this.state.currentItem;
+  //   if(newItem.text !==""){
 
-      const res2 = await axios.post('/api/food',{food_list:{
-        "name": item,
-        "calorie": cal
-      } }).then(response=>console.log(response)).catch(error=>{console.log(error)});
-
-
-      const items = [...this.state.items, newItem];
-    this.setState({
-      items: items,
-      currentItem:{
-        text:'',
-        key:''
-      }
+     
+  //     const items = [...this.state.items, newItem];
+  //   this.setState({
+  //     items: items,
+  //     currentItem:{
+  //       text:'',
+  //       key:''
+  //     }
       
-    })
-    }
-    else{
-      alert("Food item not entered!!!!")
-    }}
+  //   })
+  //   }
+  //   else{
+  //     alert("Food item not entered!!!!")
+  //   }}
   
-    else{
-      alert("Food item entered Incorrect!!!!")
-    }
-  }
-  else{
-    alert("Food item not entered!!!!")
-  }
+  //   else{
+  //     alert("Food item entered Incorrect!!!!")
+  //   }
+  // }
+  // else{
+  //   alert("Food item not entered!!!!")
+  // }
   
   
   }

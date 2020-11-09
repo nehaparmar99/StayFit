@@ -1,5 +1,4 @@
-import React, { useState,useEffect } from 'react'
-import { login } from './UserFunctions'
+import React, { useState } from 'react'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -48,29 +47,53 @@ background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+ 
 }));
 function Login() {
         const classes = useStyles();
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState("");
 	let history = useHistory();
     const onSubmit= (e)=> {
         e.preventDefault()
-        console.log("making request");
         const user = {
             email: email,
-            password: password
-        }
-        console.log(user)
-        login(user).then(res => {
-            console.log(res);
-            // if (res.error) {
-            // 	console.log("This is: " + this)
-                history.push("/dashboard")
-            // }
-        })
+            // password: password
+      }
+      fetch("users/login", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        }),
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.message === "Invalid username or password")
+          {
+           setMessage("Invalid username or password!");
+            }
+          else {
+            localStorage.setItem('email', email);
+            history.push({
+              pathname: "/dashboard",
+            state:user})
+          } 
         setEmail("");
         setPassword("")
+        })
+      .catch(err=>console.log(err))
+        // login(user).then(res => {
+        //     console.log(res);
+        //     // if (res.error) {
+        //     // 	console.log("This is: " + this)
+        //         history.push("/dashboard")
+        //     // }
+        // })
     }
     return (
                <Container component="main" maxWidth="xs">
@@ -106,11 +129,14 @@ function Login() {
             id="password"
             autoComplete="current-password"
          value={password} onChange={(e)=>(setPassword(e.target.value))}
-          />
+            />
+            
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+            />
+            
+            <h4 style={{ textAlign: "left",margin:0,"font-weight":"bold"}}>{message}</h4>
           <Button
             type="submit"
             fullWidth
@@ -118,7 +144,7 @@ function Login() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+              Sign In
           </Button>
           <Grid container>
             <Grid item xs>
@@ -131,44 +157,14 @@ function Login() {
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
-          </Grid>
+            </Grid>
         </form>
       </div>
       <Box mt={8}>
         <Copyright />
       </Box>
     </Container>    
-            // <div className="container">
-            //     <div className="row">
-            //         <div className="col-md-6 mt-5 mx-auto">
-            //             <form noValidate onSubmit={this.onSubmit}>
-            //                 <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-            //                 <div className="form-group">
-            //                     <label htmlFor="email">Email Address</label>
-            //                     <input type="email"
-            //                         className="form-control"
-            //                         name="email"
-            //                         placeholder="Enter Email"
-            //                         value={this.state.email}
-            //                         onChange={this.onChange} />
-            //                 </div>
-            //                 <div className="form-group">
-            //                     <label htmlFor="password">Password </label>
-            //                     <input type="password"
-            //                         className="form-control"
-            //                         name="password"
-            //                         placeholder="Enter Password"
-            //                         value={this.state.password}
-            //                         onChange={this.onChange} />
-            //                 </div>
 
-                            // <button type="submit" className="btn btn-lg btn-primary btn-block">
-                            //     Sign in
-                            // </button>
-            //             </form>
-            //         </div>
-            //     </div>
-            // </div>
         )
     }
 

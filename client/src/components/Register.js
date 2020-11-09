@@ -1,16 +1,11 @@
-import React, { useState,useEffect } from 'react'
-import { register } from './UserFunctions'
+import React, { useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -75,21 +70,54 @@ function Register() {
   const [password, setPassword] = useState('');
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
-    let history = useHistory();
-    const onSubmit =(e) =>{
-        e.preventDefault()
-        const newUser = {
-            first_name: first_name,
-            last_name: last_name,
-            email:email,
-            password:password,
+  const [message, setMessage] = useState("");
+    // let history = useHistory();
+  const onSubmit = (e) => {
+    e.preventDefault()
+    //   const newUser = {
+    //       first_name: first_name,
+    //       last_name: last_name,
+    //       email:email,
+    //       password:password,
+    //     age: age,
+    //       weight:weight
+    // }
+    if (first_name === "" || email === "" || password === "")
+      setMessage("Form incomplete")
+    else {
+      fetch("users/register", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+          first_name: first_name,
+          last_name: last_name,
+          email: email,
+          password: password,
           age: age,
-            weight:weight
-        }
-        register(newUser).then(res => {
-          history.push("/login")
+          weight: weight
+        }),
+      })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res)
+          if (res.message === 'User already exists')
+            setMessage("User already registered!")
+          else {
+            setMessage("User registered!")
+            //  history.push("/login")
+          }
+          setEmail("");
+          setPassword("");
+          setFName("");
+          setLName("");
+          setAge("");
+          setPassword("");
         })
+        .catch(err => console.log(err));
     }
+  }
 
   return (
       <div className={classes.root}>
@@ -174,7 +202,8 @@ function Register() {
             id="weight"
             autoComplete="current-password"
          value={weight} onChange={(e)=>(setWeight(e.target.value))}
-          />
+            />
+              <h4 style={{ textAlign: "left",margin:0,"font-weight":"bold"}}>{message}</h4>
           <Button
             type="submit"
             fullWidth
@@ -184,7 +213,10 @@ function Register() {
           >
               Sign Up
           </Button>
-        </form>
+          </form>
+           <Link color="inherit" href="/login" style={{fontSize:"20px"}}>
+        Login Here!
+      </Link>
      </div>
       <Box mt={8}>
         <Copyright />
