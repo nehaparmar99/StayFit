@@ -51,6 +51,9 @@ def register():
 def profile():
     try:
         email = request.get_json()['email']
+        if session['user']['email'] != email:
+            return jsonify({'message': 'Unauthorized'}), 401
+
         user = mongo.users.find_one({'email': email})
         return jsonify({
             'name': str(user['first_name'] + user['last_name']),
@@ -95,6 +98,9 @@ def add():
 def todo():
     try:
         email = request.get_json()['email']
+        if email != session['user']['email']:
+            return jsonify({'message': 'Unauthorized'}), 401
+
         user = mongo.users
         if request.method == 'POST':
             _id = ObjectId()
@@ -125,6 +131,9 @@ def todo():
 def delete_todo_list(todo_id):
     try:
         email = request.get_json()['email']
+        if email != session['user']['email']:
+            return jsonify({'message': 'Unauthorized'}), 401
+
         temp = mongo.users.find_one({'email': email, 'todoList._id': ObjectId(todo_id)})['todoList']
         my_list = [element for element in temp if element['_id'] == ObjectId(todo_id)][0]
         mongo.users.update({'email': email}, {"$pull": {"todoList": my_list}})
@@ -138,6 +147,9 @@ def delete_todo_list(todo_id):
 def update_todo_list(todo_id):
     try:
         email = request.get_json()['email']
+        if email != session['user']['email']:
+            return jsonify({'message': 'Unauthorized'}), 401
+
         mongo.users.update_one({'email': email, 'todoList._id': ObjectId(todo_id)},
                                {"$set": {"todoList.$.done": True}})
         return jsonify({}), 204
@@ -149,6 +161,8 @@ def update_todo_list(todo_id):
 def food():
     try:
         email = request.get_json()['email']
+        if email != session['user']['email']:
+            return jsonify({'message': 'Unauthorized'}), 401
         user = mongo.users
 
         if request.method == 'POST':
@@ -176,6 +190,8 @@ def food():
 def get_food():
     try:
         email = request.get_json()['email']
+        if email != session['user']['email']:
+            return jsonify({'message': 'Unauthorized'}), 401
 
         food_list = mongo.users.find_one({'email': email})['food_list']
         return jsonify({
