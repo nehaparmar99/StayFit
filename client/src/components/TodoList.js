@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Datepicker from 'react-datepicker';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
  space: {
     // position: 'absolute',
@@ -34,21 +35,30 @@ function TodoList(props) {
   const [startDate, setStartDate] = useState(new Date());
  
   useEffect(() => {
-    fetch("/todos/?email=props.email")
-      .then(res => {
-        console.log(res);
-        console.log("hi")
-        res.json();
-      })
-    //   .then(data => {
-    //   //   setTodos(data.map(d => (
-    //   //     {
-    //   //       id: d.id,
-    //   //       todo:d.todo
-    //   //   }
-    //   // )))
-    //     console.log(data)
-    // })
+    console.log("todolist ", props.email)
+    axios.get("/todos", {
+      params: {
+        "email":localStorage.getItem("email")
+      }
+    })
+      .then(res => console.log(res))
+    .then(data => {
+     setTodos(data.map(d => (
+    {
+    id: d.id,
+   todo:d.todo
+  }
+)))
+    console.log(data)
+  })
+    .catch(err=>console.log(err))
+    // fetch(`/todos?email=${props.email}`)
+    //   .then(res => {
+    //     console.log(res);
+       
+    //   })
+    //   .then(res=>console.log(res))
+    // .then(err=>console.log(err))
   }, []
   )
 
@@ -56,18 +66,18 @@ function TodoList(props) {
   const addTodo = (e) => {
     e.preventDefault();
      console.log(JSON.stringify(startDate))
-    
-    fetch("/todos/", {
+     
+    fetch("/todos", {
       method: "POST",
        headers: {
           "Content-type": "application/json"
-        },
+        }, 
       body: JSON.stringify({
-        email: localStorage.getItem('email'),
-        date:JSON.stringify(startDate),
+        email: localStorage.getItem("email"),
+        // date:JSON.stringify(startDate),
          task:input
         }),
-    })
+    }) 
     .then(res => console.log(res))
     .catch(err => console.log(err));
     // setTodos([...todos, input]);

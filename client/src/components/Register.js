@@ -85,7 +85,7 @@ function Register() {
     if (first_name === "" || email === "" || password === "")
       setMessage("Form incomplete")
     else {
-      fetch("users/register", {
+      fetch("/users/register", {
         method: "POST",
         headers: {
           "Content-type": "application/json"

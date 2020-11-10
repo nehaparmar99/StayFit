@@ -26,10 +26,10 @@ function Dashboard(props) {
         [23, 113, 67, 108, 190, 239, 307, 308]
       ]
   }
-  useEffect(() => {
-    fetch("/user/details/?email={email}")
-    .then(res=> console.log(res))
-  }, [])
+  // useEffect(() => {
+  //   fetch("/user/details/?email={email}")
+  //   .then(res=> console.log(res))
+  // }, [])
     return (
       <div className="content">
         <div className="container-fluid">

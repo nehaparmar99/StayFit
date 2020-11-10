@@ -2,7 +2,7 @@ from flask import jsonify, request, session
 from app import app, mongo, crypt
 from bson.objectid import ObjectId
 
-
+ 
 def index():
     return app.send_static_file('index.html')
 
@@ -98,8 +98,8 @@ def add():
 def todo():
     try:
         email = request.get_json()['email']
-        if email != session['user']['email']:
-            return jsonify({'message': 'Unauthorized'}), 401
+        # if email != session['user']['email']:
+        #     return jsonify({'message': 'Unauthorized'}), 401
 
         user = mongo.users
         if request.method == 'POST':
@@ -125,6 +125,7 @@ def todo():
 
     except Exception as e:
         print("Error:", e)
+        print(email)
         return jsonify({'message': 'error'}), 500
 
 

@@ -61,7 +61,7 @@ function Login() {
             email: email,
             // password: password
       }
-      fetch("users/login", {
+      fetch("/users/login", {
         method: "POST",
         headers: {
           "Content-type": "application/json"
