@@ -48,6 +48,24 @@ def register():
         return jsonify({'message': 'error'}), 500
 
 
+def profile():
+    try:
+        email = request.get_json()['email']
+        user = mongo.users.find_one({'email': email})
+        return jsonify({
+            'name': str(user['first_name'] + user['last_name']),
+            'email': user['email'],
+            'height': user['height'] if 'height' in user else "",
+            'weight': user['weight'] if 'weight' in user else "",
+            'age': user['age'] if 'age' in user else "",
+            'gender': user['gender'] if 'gender' in user else ""
+        })
+
+    except Exception as e:
+        print(e)
+        return jsonify({'message': 'error'}), 500
+
+
 def logout():
     session.clear()
     return jsonify({'message': 'Logged Out'})
@@ -61,11 +79,12 @@ def add():
         if email != session['user']['email']:
             return jsonify({'message': 'Unauthorized'}), 401
 
+        age = json['age'] if 'age' in json else ""
         weight = json['weight'] if 'weight' in json else ""
         height = json['height'] if 'height' in json else ""
         gender = json['gender'] if 'gender' in json else ""
 
-        mongo.users.update({'email': email}, {"$set": {'weight': weight, 'height': height, 'gender': gender}})
+        mongo.users.update({'email': email}, {"$set": {'age': age, 'weight': weight, 'height': height, 'gender': gender}})
         return jsonify({})
 
     except Exception as e:
