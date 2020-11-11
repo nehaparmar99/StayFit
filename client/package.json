@@ -35,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start-api": "cd flask-backend && flask run",
-   "dev": "concurrently \"npm start\" \"npm run start-api\"",
+    "dev": "concurrently \"npm start\" \"npm run start-api\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

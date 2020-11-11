@@ -137,9 +137,9 @@ def update__todo_list(todo_id):
 
 
 @app.route('/api/food', methods=['POST', 'GET'])
-@jwt_required
+# @jwt_required
 def food():
-    email = get_jwt_identity()['email']
+    email = request.get_json()['email']
     user = mongo.db.users
 
     if request.method == 'POST':

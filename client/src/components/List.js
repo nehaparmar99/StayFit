@@ -27,12 +27,17 @@ class List extends Component {
     this.setUpdate = this.setUpdate.bind(this);
   }
 
-  // async componentDidMount() {
-  //   const res2 = await axios.post('/api/food').then(response=>response).catch(error=>{console.log(error)});
-  //   for(var i =0 ; i<res2.data.food_list.length;i++)
-  //   {
+  //  componentDidMount() {
+  //   // const res2 = await axios.post('/api/food').then(response=>response).catch(error=>{console.log(error)});
+  //   // for(var i =0 ; i<res2.data.food_list.length;i++)
+  //   // {
      
-  //   }
+  //   // }
+  //   fetch('/api/food').then((response)=>{
+  //     response.json().then((data)=>{
+  //       console.log(data)
+  //     })
+  //   })
   // }
 
   async addItem (e) {
@@ -57,10 +62,12 @@ class List extends Component {
     const newItem = this.state.currentItem;
     if(newItem.text !==""){
 
-      const res2 = await axios.post('/api/food',{food_list:{
-        "name": item,
-        "calorie": cal
-      } }).then(response=>console.log(response)).catch(error=>{console.log(error)});
+      // const res2 = await axios.post('/api/food',{food_list:{
+      //   "name": item,
+      //   "calorie": cal
+      // } }).then(response=>console.log(response)).catch(error=>{console.log(error)});
+      fetch('http://localhost:5000/api/food',{method:"POST",headers:{"Content-type":"application/json"},body:JSON.stringify({email:"n@gmail.com",name:item,calorie:cal}),})
+      .then(res=>console.log(res)).catch(err=>console.log(err))
 
 
       const items = [...this.state.items, newItem];
