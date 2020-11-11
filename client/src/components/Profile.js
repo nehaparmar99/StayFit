@@ -11,9 +11,9 @@ const Pricing = () => {
   const [profileCell, setProfileCell] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const [profileEmail, setProfileEmail] = useState("");
-  // const [profileHeight, setProfileEmail] = useState("");
-  // const [profileWeight, setProfileEmail] = useState("");
-  // const [profileAge, setProfileEmail] = useState("");
+  // const [profileHeight, setProfileHeight] = useState("");
+  // const [profileWeight, setProfileWeight] = useState("");
+  // const [profileAge, setProfileAge] = useState("");
   const profileData = async () => {
     try {
       const res = await axios.get("https://randomuser.me/api/");
@@ -32,7 +32,7 @@ const Pricing = () => {
       // );
       // setProfileWeight(res.data.weight);
       // setProfileHeight(res.data.height);
-      // setProfileImage(res.data.age)
+      // setProfileAge(res.data.age)
 
      
     } catch (error) {
