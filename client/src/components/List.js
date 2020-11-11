@@ -40,8 +40,22 @@ class List extends Component {
   //   })
   // }
 
-  async addItem (e) {
+  
+  componentDidMount() {
+    const l = localStorage.getItem('email')
+    console.log(l);
+    fetch('http://localhost:5000/api/get-food',{method:"POST",headers:{"Content-type":"application/json"},body:JSON.stringify({email:l}),})
+      .then(res=>console.log(res)).catch(err=>console.log(err))
+  }
+  async addItem(e) {
     e.preventDefault();
+    // fetch('api/food',
+    //   {
+    //     method: "POST",
+    //     headers: { "Content-type": "application/json" },
+    //     body: JSON.stringify({ email: "n@gmail.com", name: "neha", calorie: 200 }),
+    //   })
+    //   .then(res=>console.log(res)).catch(err=>console.log(err))
     // const res = await fetch("https://jsonplaceholder.typicode.com/todos/1").then((response)=> response.json())
     //  alert(res)
     var item = this.state.currentItem.text
@@ -66,10 +80,13 @@ class List extends Component {
       //   "name": item,
       //   "calorie": cal
       // } }).then(response=>console.log(response)).catch(error=>{console.log(error)});
-      fetch('http://localhost:5000/api/food',{method:"POST",headers:{"Content-type":"application/json"},body:JSON.stringify({email:"n@gmail.com",name:item,calorie:cal}),})
+      const l = localStorage.getItem('email')
+      console.log(l);
+      fetch('http://localhost:5000/api/food',{method:"POST",headers:{"Content-type":"application/json"},body:JSON.stringify({email:l,name:item,calorie:cal}),})
       .then(res=>console.log(res)).catch(err=>console.log(err))
 
 
+     
       const items = [...this.state.items, newItem];
     this.setState({
       items: items,
@@ -102,6 +119,9 @@ class List extends Component {
       }
     })
   }
+
+  
+
   deleteItem(key){
     const filteredItems= this.state.items.filter(item =>
       item.key!==key);

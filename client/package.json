@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@datepicker-react/hooks": "^2.7.0",
+    "@emotion/core": "^10.1.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
@@ -25,6 +27,7 @@
     "react-datepicker": "^3.3.0",
     "react-dom": "^16.5.2",
     "react-flip-move": "^3.0.4",
+    "react-global": "^0.1.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "2.0.4",
     "react-transition-group": "^4.4.1",
@@ -37,6 +40,8 @@
     "start-api": "cd flask-backend && flask run",
     "dev": "concurrently \"npm start\" \"npm run start-api\"",
     "build": "react-scripts build",
+    "start-api": "cd flask-backend && flask run",
+    "dev": "concurrently \"npm start\" \"npm run start-api\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

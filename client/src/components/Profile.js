@@ -1,57 +1,3 @@
-// import React, { Component } from 'react'
-// import jwt_decode from 'jwt-decode'
-
-// class Profile extends Component {
-//     constructor() {
-//         super()
-//         this.state = {
-//             first_name: '',
-//             last_name: '',
-//             email: ''
-//         }
-//     }
-
-//     componentDidMount () {
-//         const token = localStorage.usertoken
-//         const decoded = jwt_decode(token)
-//         this.setState({
-//             first_name: decoded.identity.first_name,
-//             last_name: decoded.identity.last_name,
-//             email: decoded.identity.email
-//         })
-//     }
-
-//     render () {
-//         return (
-//             <div className="container">
-//                 <div className="jumbotron mt-5">
-//                     <div className="col-sm-8 mx-auto">
-//                         <h1 className="text-center">PROFILE</h1>
-//                     </div>
-//                     <table className="table col-md-6 mx-auto">
-//                         <tbody>
-//                             <tr>
-//                                 <td>First Name</td>
-//                                 <td>{this.state.first_name}</td>
-//                             </tr>
-//                             <tr>
-//                                 <td>Last Name</td>
-//                                 <td>{this.state.last_name}</td>
-//                             </tr>
-//                             <tr>
-//                                 <td>Email</td>
-//                                 <td>{this.state.email}</td>
-//                             </tr>
-//                         </tbody>
-//                     </table>
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
-
-// export default Profile
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./profile.css";
@@ -65,7 +11,9 @@ const Pricing = () => {
   const [profileCell, setProfileCell] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const [profileEmail, setProfileEmail] = useState("");
-
+  // const [profileHeight, setProfileEmail] = useState("");
+  // const [profileWeight, setProfileEmail] = useState("");
+  // const [profileAge, setProfileEmail] = useState("");
   const profileData = async () => {
     try {
       const res = await axios.get("https://randomuser.me/api/");
@@ -75,6 +23,16 @@ const Pricing = () => {
       setProfileName(
         `${res.data.results[0].name.first} ${res.data.results[0].name.last}`
       );
+      // const res = await axios.get("/profile");
+      // setProfileCell(res.data.results[0].cell);
+      // setProfileEmail(res.data.email);
+      // setProfileImage(res.data.results[0].picture.large);
+      // setProfileName(
+      //   res.data.name
+      // );
+      // setProfileWeight(res.data.weight);
+      // setProfileHeight(res.data.height);
+      // setProfileImage(res.data.age)
 
      
     } catch (error) {
@@ -100,7 +58,10 @@ const Pricing = () => {
         
         <h1>{profileName}</h1>
         <p className="title">{profileEmail}</p>
-        <h5>Age : 20</h5>
+        {/* <h5>Age : {profileAge}</h5> */}
+        <h5>Age : 20</h5> 
+        {/* <h5>Weight : {profileWeight}</h5>
+        <h5>Height : {profileHeight}</h5> */}
         <h5>Weight : 40 kg</h5>
         <h5>Height : 170 cm</h5>
         <p>{profileCell}</p>

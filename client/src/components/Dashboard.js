@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import ChartistGraph from 'react-chartist'
 import TodoList from './TodoList'
 
-class Dashboard extends Component {
-  render() {
+function Dashboard(props) {
+  const { email} =
+    (props.location && props.location.state) || {};
     let dataPie = {
       labels: ["40%", "20%", "40%"],
       series: [40, 20, 40]
@@ -24,7 +25,11 @@ class Dashboard extends Component {
         [67, 152, 143, 240, 287, 335, 435, 437],
         [23, 113, 67, 108, 190, 239, 307, 308]
       ]
-    }
+  }
+  // useEffect(() => {
+  //   fetch("/user/details/?email={email}")
+  //   .then(res=> console.log(res))
+  // }, [])
     return (
       <div className="content">
         <div className="container-fluid">
@@ -74,10 +79,9 @@ class Dashboard extends Component {
 
           </div>
         </div>
-        <TodoList></TodoList>
+        <TodoList email={email}></TodoList>
       </div>
     )
   }
-}
 
 export default Dashboard

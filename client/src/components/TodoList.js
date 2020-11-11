@@ -1,115 +1,3 @@
-// import React, { Component } from "react";
-// // import "./App.css";
-// import Todos from "./Todos";
-// import ViewToggle from "./ViewToggle";
-// export default class TodoList extends Component {
-//   state = {
-//     todos: ["Wash Clothes", "Press Items"],
-//     showDone: false
-//   };
-
-//   handleDone = todo => {
-//     const todos = [...this.state.todos];
-//     const index = todos.indexOf(todo);
-//     const putData = {
-//       method: "PUT",
-//       body: JSON.stringify({ done: !todo.done }),
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     };
-//     fetch("/todos/" + todo.id, putData)
-//       .then(response => response.json())
-//       .then(({ todo }) => {
-//         todos[index] = { id: todo.id, task: todo.task, done: todo.done };
-//         this.setState({ todos });
-//       })
-//       .catch(error => console.log(error));
-//   };
-
-//   handleAddTodo = task => {
-//     const todos = [...this.state.todos];
-//     const postData = {
-//       method: "POST",
-//       body: JSON.stringify({ task: task }),
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     };
-//     fetch("/todos/", postData)
-//       .then(response => response.json())
-//       .then(({ todo }) => {
-//         todos.push({ id: todo.id, task: todo.task, done: todo.done });
-//         this.setState({ todos, showDone: false });
-//       })
-//       .catch(error => console.log(error));
-//   };
-
-//   handleRemoveTodo = todo => {
-//     const deleteData = {
-//       method: "DELETE",
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     };
-//     fetch("/todos/" + todo.id, deleteData)
-//       .then(response => response.json())
-//       .then(data => {
-//         if (data.code === 200) {
-//           const todos = this.state.todos.filter(td => td !== todo);
-//           this.setState({ todos });
-//         }
-//       })
-//       .catch(error => console.log(error));
-//   };
-
-//   handleViewToggle = bool => this.setState({ showDone: bool });
-
-//   todosSelector = () => {
-//     if (this.state.showDone) {
-//       return this.state.todos.filter(td => td.done);
-//     }
-//     return this.state.todos.filter(td => td.done === false);
-//   };
-
-//   componentDidMount() {
-//     fetch("/todos/")
-//       .then(response => response.json())
-//       .then(data => this.setState({ todos: data }))
-//       .catch(error => console.log(error));
-//   }
-
-//   render() {
-//     return (
-//        <>
-//       <div className="container-fluid mt-5">
-//         <div className="row justify-content-center">
-//           <div className="col-8">
-//             <div className="card text-center">
-//               <div className="card-header">
-//                 <ul className="nav card-header-pills justify-content-center">
-//                   <li className="nav-item">
-//                     <ViewToggle
-//                       handleViewToggle={this.handleViewToggle}
-//                       showDone={this.state.showDone}
-//                     />
-//                   </li>
-//                 </ul>
-//               </div>
-//               <Todos
-//                 todos={this.todosSelector()}
-//                 handleDone={this.handleDone}
-//                 handleRemoveTodo={this.handleRemoveTodo}
-//                 handleAddTodo={this.handleAddTodo}
-//               />
-//             </div>
-//           </div>
-//         </div>
-//         </div>
-//         </>
-//     );
-//   }
-// }
 import React, { useEffect, useState } from "react";
 import { Button } from '@material-ui/core';
 import { FormControl,Input,InputLabel } from '@material-ui/core';
@@ -117,7 +5,9 @@ import Todo from "./Todo"
 import "./TodoList.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Datepicker from 'react-datepicker';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
  space: {
     // position: 'absolute',
@@ -138,16 +28,66 @@ const useStyles = makeStyles((theme) => ({
     "padding-bottom":"15px"
   }
 }));
-function TodoList() {
+function TodoList(props) {
    const classes = useStyles();
   const [todos, setTodos] = useState(["wash clothes","read a book"]);
   const [input, setInput] = useState("");
-   const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+ 
+  useEffect(() => {
+    console.log("todolist ", props.email)
+    axios.get("/todos", {
+      params: {
+        "email":localStorage.getItem("email")
+      }
+    })
+      .then(res => console.log(res))
+    .then(data => {
+     setTodos(data.map(d => (
+    {
+    id: d.id,
+   todo:d.todo
+  }
+)))
+    console.log(data)
+  })
+    .catch(err=>console.log(err))
+    // fetch(`/todos?email=${props.email}`)
+    //   .then(res => {
+    //     console.log(res);
+       
+    //   })
+    //   .then(res=>console.log(res))
+    // .then(err=>console.log(err))
+  }, []
+  )
+
+
   const addTodo = (e) => {
     e.preventDefault();
-    setTodos([...todos, input]);
+     console.log(JSON.stringify(startDate))
+     
+    fetch("/todos", {
+      method: "POST",
+       headers: {
+          "Content-type": "application/json"
+        }, 
+      body: JSON.stringify({
+        email: localStorage.getItem("email"),
+        // date:JSON.stringify(startDate),
+         task:input
+        }),
+    }) 
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+    // setTodos([...todos, input]);
     setInput("");
   }
+  
+ const handleChange = date => {
+   setStartDate(date);
+  }
+
   return (
     <div className="App">
     <h1 className={classes.heading}>TODOS</h1>
@@ -155,8 +95,14 @@ function TodoList() {
         <FormControl>
           <InputLabel className={classes.spaces}>Write a todo</InputLabel>
   <Input className={classes.space} value={input} onChange={(e)=>(setInput(e.target.value))}/>
-  <span className={classes.span}>Set a Deadline </span>
-          <DatePicker selected={startDate} defaultValue={new Date(2018, 1, 20)} required={true} onChange={date => setStartDate(date)} />
+          <span className={classes.span}>Set a Deadline </span>
+           <Datepicker
+     selected={startDate}
+            onChange={handleChange}
+            defaultValue={new Date(2018, 1, 20)}
+              name="startDate"
+              dateFormat="MM/dd/yyyy"
+    />
         </FormControl>
              <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="primary" >
   Add Todo
@@ -164,7 +110,7 @@ function TodoList() {
       </form>
        <ul>
         {todos.map((todo) => (
-            <Todo todo={todo} setTodo={setTodos} todos={todos} />
+            <Todo todo={todo} key={todo.id} setTodo={setTodos} todos={todos} email={props.email} />
         ))}
       </ul> 
     </div>
